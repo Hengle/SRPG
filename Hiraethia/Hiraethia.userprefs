@@ -1,8 +1,8 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\SceneDialogue02.cs">
     <Files>
-      <File FileName="Assets\Scripts\SceneDialogue02.cs" Line="87" Column="43" />
+      <File FileName="Assets\Scripts\SceneDialogue02.cs" Line="83" Column="53" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

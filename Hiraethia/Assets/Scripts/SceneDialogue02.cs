@@ -11,33 +11,34 @@ public class SceneDialogue02 : MonoBehaviour {
 	public Image background1;
 	public Image background2;
 
-	IEnumerator backgroundswitchspeed() {
-		yield return new WaitForSeconds(1.0f);
+	//switchbackground((Image)Current Shown, (Image) to transition to, (float) Time of transition)
+	void switchbackground(Image currentimage,Image nextimage, float aTime){
+		StartCoroutine(FadeTo(currentimage,nextimage, aTime));
 	}
-	void backgroundswitch(ref Image currentimage,ref Image nextimage){
-		Color currentimagecolor = currentimage.color;
-		Color nextimagecolor = nextimage.color;
-		Debug.Log (currentimagecolor.a);
-		for(float o = 1.00f; o > 0.0f; o=o-.01f){
-			currentimagecolor.a = o;
-			currentimage.color = currentimagecolor;
-			StartCoroutine(backgroundswitchspeed());
+	IEnumerator FadeTo(Image currentimage,Image nextimage,float aTime)
+	{
+		for (float t = 0.0f; t < 1.0f; t += Time.deltaTime / aTime)
+		{
+			Color newColor = new Color(1, 1, 1, Mathf.Lerp(0.0f,1.0f,t));
+			nextimage.color = newColor;
+			yield return null;
 		}
-		for(float s = 0.0f; s < 1.00f; s=s+.01f){	
-			nextimagecolor.a = s;
-			nextimage.color = nextimagecolor;
-			StartCoroutine(backgroundswitchspeed());
+		for (float t = 0.0f; t < 1.0f; t += Time.deltaTime / aTime)
+		{
+			Color newColor = new Color(1, 1, 1, Mathf.Lerp(1.0f,0.0f,t));
+			currentimage.color = newColor;
+			yield return null;
 		}
-
 	}
 
+	//dialoguecall((String) to print out)
+	void dialoguecall(string passstring)
+	{
+		isrunning = true;
+		StartCoroutine(stringcall(passstring));
+	}
 	void printchar(char c) {
         textfield.text = textfield.text + c;
-    }
-    void dialoguecall(string passstring)
-    {
-        isrunning = true;
-        StartCoroutine(stringcall(passstring));
     }
     IEnumerator stringcall(string dialogue)
     {
@@ -61,15 +62,14 @@ public class SceneDialogue02 : MonoBehaviour {
            }
        }
     }
-    // Use this for initialization
+
     void Start()
     {
 		//First dialogue display
         currenttext = "Insert dialogue to be displayed."; //String type
         dialoguecall(currenttext);
 	}
-	
-	// Update is called once per frame
+
 	void Update () {
 		//Input Triggers
 		if ((Input.GetKeyDown(KeyCode.Space)) || (Input.GetKeyDown(KeyCode.Return)) || (Input.GetMouseButtonDown(0)) || (Input.GetKeyDown(KeyCode.KeypadEnter)))
@@ -79,19 +79,23 @@ public class SceneDialogue02 : MonoBehaviour {
             dialoguecounter++;
             switch (dialoguecounter)
             {
-                case 2://Second dialogue to display
-                    currenttext = "...";
+                case 2://Second dialogue to display.
+					switchbackground(background1,background2, .5f);
+                    currenttext = "Dialogue Text Number Two";
                     dialoguecall(currenttext);
                     break;
                 case 3:// Third
-					backgroundswitch(ref background1,ref background2);
-                    currenttext = "....";
+					currenttext = "Dialogue Text Number Three";
                     dialoguecall(currenttext);
                     break;
                 case 4:// etc.
-                    currenttext = ".....";
+					currenttext = "Dialogue Text Number Four";
                     dialoguecall(currenttext);
                     break;
+				case 5:// etc.
+					currenttext = "Dialogue Text Number Five";
+					dialoguecall(currenttext);
+					break;
 				default:// Clear dialogue on complete
 					currenttext = "";
 					dialoguecall(currenttext);
