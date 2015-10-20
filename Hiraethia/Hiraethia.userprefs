@@ -1,9 +1,8 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workspace />
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\SceneDialogue02.cs">
     <Files>
-      <File FileName="Z:\Auragon\SRPG\Assets\SlideUp.cs" Line="16" Column="31" />
-      <File FileName="Assets\Scripts\SceneDialogue02.cs" Line="65" Column="42" />
+      <File FileName="Assets\Scripts\SceneDialogue02.cs" Line="87" Column="43" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

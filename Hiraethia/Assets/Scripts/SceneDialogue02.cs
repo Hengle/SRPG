@@ -7,9 +7,31 @@ public class SceneDialogue02 : MonoBehaviour {
     string currenttext = "";
     bool isrunning = false;
     bool isforcedcomplete = false;
-    int dialoguecounter = 1;
-    void printchar(char c)
-    {
+	int dialoguecounter = 1;
+	public Image background1;
+	public Image background2;
+
+	IEnumerator backgroundswitchspeed() {
+		yield return new WaitForSeconds(1.0f);
+	}
+	void backgroundswitch(ref Image currentimage,ref Image nextimage){
+		Color currentimagecolor = currentimage.color;
+		Color nextimagecolor = nextimage.color;
+		Debug.Log (currentimagecolor.a);
+		for(float o = 1.00f; o > 0.0f; o=o-.01f){
+			currentimagecolor.a = o;
+			currentimage.color = currentimagecolor;
+			StartCoroutine(backgroundswitchspeed());
+		}
+		for(float s = 0.0f; s < 1.00f; s=s+.01f){	
+			nextimagecolor.a = s;
+			nextimage.color = nextimagecolor;
+			StartCoroutine(backgroundswitchspeed());
+		}
+
+	}
+
+	void printchar(char c) {
         textfield.text = textfield.text + c;
     }
     void dialoguecall(string passstring)
@@ -62,6 +84,7 @@ public class SceneDialogue02 : MonoBehaviour {
                     dialoguecall(currenttext);
                     break;
                 case 3:// Third
+					backgroundswitch(ref background1,ref background2);
                     currenttext = "....";
                     dialoguecall(currenttext);
                     break;
