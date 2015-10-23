@@ -2,6 +2,34 @@
 using System.Collections;
 
 public class _GM : MonoBehaviour {
+	public Tile[,] map;
+
+	public class Tile{
+		bool legal;
+		Unit unit;
+		bool altitude;
+
+		public Tile(bool l,bool a){
+			legal = l;
+			unit = null;
+			altitude = a;
+		}
+
+		public Tile(Unit u, bool a){
+			legal = true;
+			unit = u;
+			altitude = a;
+		}
+
+		public string SayHi(){
+			return "I'm a tile!";
+		}
+
+		public Unit getUnit(){
+			return unit;
+		}
+	}
+
 	public enum CharClass {Swordsman,Medic,Gunslinger,Sniper,Brawler,Recon};	//These may each be separate classes later, for now they are enum constants.
 
 	[System.Serializable]
@@ -37,5 +65,16 @@ public class _GM : MonoBehaviour {
 			: base (c)
 		{
 		}
+	}
+
+	void Start(){
+		map = new Tile[16,10];
+		for(int u=0;u<map.GetLength(0);u++){
+			for(int v=0;v<map.GetLength(1);v++){
+				map[u,v]=new Tile(new FriendlyUnit(4),false);
+			}
+		}
+		Debug.Log (map[4,4].SayHi());
+		map[6,8].getUnit().sayHi();
 	}
 }
